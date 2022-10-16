@@ -1,3 +1,4 @@
 export const initialState = {
-  state: true
+  xIsNext: true,
+  board: Array(9).fill(null)
 }

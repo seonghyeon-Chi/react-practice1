@@ -1,12 +1,12 @@
-import {useState} from 'react';
-import {Square} from "./Square";
+import { Square } from "./Square";
 import { useDispatch, useSelector } from 'react-redux'
-import { setState } from '../actions'
+import { setXIsNext, setBoard } from '../actions'
 
 function Board () {
-  const [board, setBoard] = useState(Array(9).fill(null))
   const xIsNextState = useSelector(state => state.xIsNextReducer)
+  const boardState = useSelector(state => state.boardReducer)
   const { xIsNext } = xIsNextState
+  const { board } = boardState
   const dispatch = useDispatch();
 
   const status = 'Next player: ' + (xIsNext ? 'X' : 'O')
@@ -14,8 +14,8 @@ function Board () {
   const handleClick = (i) => {
     const squares = board.slice();
     squares[i] = xIsNext ? 'X' : 'O'
-    setBoard(squares)
-    dispatch(setState(!xIsNext))
+    dispatch(setBoard(squares))
+    dispatch(setXIsNext(!xIsNext))
   }
   
   const renderSquare = (i) => {
